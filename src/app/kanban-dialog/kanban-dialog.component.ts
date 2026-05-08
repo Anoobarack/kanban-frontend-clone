@@ -33,17 +33,18 @@ export class KanbanDialogComponent implements OnInit {
   } 
 
   save() {
-    this.title = this.form.get('title').value;
-    if (this.title) {
-      this.kanbanService.saveNewKanban(this.title).subscribe(
+  this.title = this.form.get('title').value;
 
-        response => {
-          console.log(response)
-        }
-      )
-    }
-    this.dialogRef.close();
-    window.location.reload();
+  if (this.title) {
+    this.kanbanService.saveNewKanban(this.title).subscribe(
+      response => {
+        console.log(response);
+
+        this.dialogRef.close();
+        window.location.reload();
+      }
+    );
+  }
   }
 
 }
