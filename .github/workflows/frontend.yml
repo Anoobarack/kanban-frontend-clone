@@ -1,0 +1,23 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build frontend image
+        run: docker build -t frontend .
+
+      - name: Restart frontend containers
+        run: |
+          cd "/home/igolovkodev/aston course git/igolovkodev-aston_devops_10/task8"
+          docker compose up -d --force-recreate frontend1 frontend2 nginx-balancer
